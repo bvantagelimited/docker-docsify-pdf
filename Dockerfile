@@ -14,6 +14,8 @@ RUN USER=node && \
     mkdir -p /etc/fixuid && \
     printf "user: $USER\ngroup: $GROUP\npaths:\n  - /home/node/pdf\n  - /home/node/.static\n  - /home/node/resources" > /etc/fixuid/config.yml
 
+RUN sysctl -w fs.inotify.max_user_watches=524288
+
 WORKDIR /home/node
 RUN mkdir -p /home/node/.static/ && chown -R node:node /home/node/.static/
 
